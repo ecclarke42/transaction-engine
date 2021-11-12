@@ -4,4 +4,25 @@ version = "0.1.0"
 authors = ["Elliott Clarke <ecclarke42@gmail.com>"]
 edition = "2021"
 
+[lib]
+name = "transaction_engine"
+path = "src/lib.rs"
+
+[[bin]]
+name = "single-csv-transaction-engine"
+path = "bin/csv-engine.rs"
+
 [dependencies]
+async-trait = { version = "0.1", optional = true }
+csv = { version = "1.1" }
+rust_decimal = { version = "1", features = ["serde-float", "serde-str"], optional = true }
+serde = { version = "1", features = ["derive"] }
+thiserror = "1"
+
+[dev-dependencies]
+rust_decimal_macros = "1"
+
+[features]
+default = ["decimal"]
+async-engine = ["async-trait"]
+decimal = ["rust_decimal"]
